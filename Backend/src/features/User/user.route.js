@@ -15,7 +15,6 @@ app.get("/matchIncomeAndCar", async (req, res) => {
         },
       },
     ]);
-    // data.filter()
     return res.status(200).send(data);
   } catch (error) {
     return res.status(404).send({ error:"Internal Server error" });
