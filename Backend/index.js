@@ -11,13 +11,16 @@ app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 app.use("", userRoute);
+app.get("", async (req, res) => {
+    res.send("Hello to the api")
+})
+
 
 app.listen(PORT, async (req, res) => {
-  try {
-    await connect();
-    console.log(`http://localhost:${PORT}`);
-  } catch (error) {
-    console.log(error.message);
-    // return res.send(error);
-  }
-});
+    try {
+        await connect();
+        console.log(`http://localhost:${PORT}`)
+    } catch (error) {
+        console.log(error);
+    }
+})
