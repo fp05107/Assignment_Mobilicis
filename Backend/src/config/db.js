@@ -1,7 +1,7 @@
 require("dotenv").config();
-const mongoose = require('mongoose');
-// const MONGOURl = process.env.MONGOURl
+const mongoose = require("mongoose");
+const MONGOURl = process.env.MONGOURL;
 module.exports = connect = async () => {
-    // console.log("Connected");
-    return await mongoose.connect("mongodb://localhost:27017/Mobilicis");
+    console.log(typeof(MONGOURl))
+  return await mongoose.connect(MONGOURl);
 };

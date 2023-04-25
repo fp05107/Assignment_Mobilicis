@@ -18,13 +18,13 @@ app.get("/matchIncomeAndCar", async (req, res) => {
     // data.filter()
     return res.status(200).send(data);
   } catch (error) {
-    return res.status(404).send({ message: error.message });
+    return res.status(404).send({ error:"Internal Server error" });
   }
 });
 // Male Users which have phone price greater than 10,000.
 app.get("/vivek2", async (req, res) => {
   try {
-    const data = await User.find({ phone_price: { $gt: 10000 } });
+    const data = await User.find({ phone_price: { $gt: 100 } });
     return res.status(200).send(data);
   } catch (error) {
     return res.status(404).send({ message: error.message });
@@ -40,6 +40,7 @@ app.get("/vivek3", async (req, res) => {
     return res.status(404).send({ message: error.message });
   }
 });
+
 
 // Show the data of top 10 cities which have the highest number of users and their average income.
 
