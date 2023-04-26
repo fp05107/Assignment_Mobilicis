@@ -20,7 +20,7 @@ const CitiesTable = () => {
     }
     useEffect(() =>{
         fetchAndUpdateCities();
-    },[cities])
+    },[])
   return (
     <Table
     variant="striped"

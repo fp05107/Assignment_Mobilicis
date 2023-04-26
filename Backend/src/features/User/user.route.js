@@ -6,7 +6,7 @@ const app = express.Router();
 //Default
 app.get("/", async (req, res) => {
   const { page, limit } = req.query;
-  const perPage = parseInt(limit) || 5; // Default limit to 10 records per page
+  const perPage = parseInt(limit) || 10; // Default limit to 10 records per page
   const currentPage = parseInt(page) || 1; // Default page to 1
   try {
     const data = await User.find()

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {Routes, Route, useNavigate} from 'react-router-dom';
+// import {Routes, Route, useNavigate} from 'react-router-dom';
 import "./App.css";
 import {
   Flex,
@@ -23,7 +23,6 @@ import {
 } from "@chakra-ui/icons";
 import UserTable from "./Components/UserTable";
 import {
-  getTopCities,
   getUsers,
   getUsersByCar,
   getUsersByIncomeAndCar,
@@ -36,7 +35,7 @@ function App() {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [usertype, setUsertype] = useState("");
-  const navigate = useNavigate();
+  const [showComponent, setShowComponent] = useState(false);
 
   function fetchUsersAndUpdateData(page, limit,usertype) {
     if (usertype === "usersByIncomeAndCar") {
@@ -58,12 +57,10 @@ function App() {
   // console.log(users);
   const handleClick = (usertype) => {
     setPage(0);
+    setShowComponent(false)
     setUsertype(usertype);
   };
-  const navigateCities = () => {
-    // 👇️ navigate to /
-    navigate('/cities');
-  };
+
   return (
     <div className="App">
       <Stack direction="column" spacing={4} align="center">
@@ -99,16 +96,14 @@ function App() {
           email does not include any digit.
         </Button>
         <Button
-          onClick={() => navigateCities()}
+          onClick={() => setShowComponent(true)}
           colorScheme="teal"
           variant="outline"
         >
           Show the data of top 10 cities which have the highest number of users
           and their average income.{" "}
         </Button>
-        <Routes>
-          <Route path="/cities" element={<CitiesTable />} />
-        </Routes>
+        {showComponent && <CitiesTable />}
       </Stack>
       <UserTable users={users} />
       <Flex justifyContent="space-between" m={4} alignItems="center">
