@@ -98,9 +98,6 @@ app.get("/usersByCar", async (req, res) => {
 
 // Show the data of top 10 cities which have the highest number of users and their average income.
 app.get("/topCities", async (req, res) => {
-  const { page, limit } = req.query;
-  const perPage = parseInt(limit) || 10; // Default limit to 10 records per page
-  const currentPage = parseInt(page) || 1; // Default page to 1
   try {
     const cityStats = await User.aggregate([
       {
@@ -113,11 +110,10 @@ app.get("/topCities", async (req, res) => {
       {
         $sort: { totalUsers: -1 },
       },
-      {
-        $limit: 10,
-      },
-    ]).skip((currentPage - 1) * perPage) // Skip records based on current page and limit
-    .limit(perPage); // Fetch records based on limit;;
+      // {
+      //   $limit: 10,
+      // },
+    ])
     return res.status(200).send(cityStats);
   } catch (error) {
     return res.status(500).send({ error: "Internal Server Error" });

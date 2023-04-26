@@ -22,7 +22,7 @@ export const getUsersByCar = async (params = {}) =>{
     return res.data;
 }
 
-export const getTopCities = async (params = {}) =>{
-    let res = await axios.get(`http://localhost:8080/topCities/?page=${params.page}&limit=${params.limit}`);
+export const getTopCities = async () =>{
+    let res = await axios.get(`http://localhost:8080/topCities`);
     return res.data;
 }

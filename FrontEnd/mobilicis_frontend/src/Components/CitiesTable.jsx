@@ -1,6 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import {
+    Table,
+    TableCaption,
+    Thead,
+    Tr,
+    Th,
+    Tbody,
+    Td,
 
-const CitiesTable = ({ cities }) => {
+}
+from "@chakra-ui/react"
+import { getTopCities } from './api'
+
+const CitiesTable = () => {
+
+    const [cities,setCities] = useState([]);
+    function fetchAndUpdateCities(){
+        getTopCities().then((response) => setCities(response)) 
+    }
+    useEffect(() =>{
+        fetchAndUpdateCities();
+    },[cities])
   return (
     <Table
     variant="striped"

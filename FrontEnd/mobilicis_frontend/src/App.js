@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import {Routes, Route, useNavigate} from 'react-router-dom';
 import "./App.css";
 import {
   Flex,
@@ -29,14 +30,15 @@ import {
   getUsersByLastNameM,
   getUsersByPhonePrice,
 } from "./Components/api";
+import CitiesTable from "./Components/CitiesTable";
 function App() {
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
-  const [cities, setCities] = useState([]);
   const [usertype, setUsertype] = useState("");
+  const navigate = useNavigate();
 
-  function fetchUsersAndUpdateData(page, limit) {
+  function fetchUsersAndUpdateData(page, limit,usertype) {
     if (usertype === "usersByIncomeAndCar") {
       getUsersByIncomeAndCar({ page, limit }).then((res) => setUsers(res));
     } else if (usertype === "usersByPhonePrice") {
@@ -45,23 +47,23 @@ function App() {
       getUsersByLastNameM({ page, limit }).then((res) => setUsers(res));
     } else if (usertype === "usersByCar") {
       getUsersByCar({ page, limit }).then((res) => setUsers(res));
-    } else if (usertype === "topCities") {
-      getTopCities({ page, limit }).then((res) => setCities(res));
     } else {
       getUsers({ page, limit }).then((res) => setUsers(res));
     }
   }
-
   useEffect(() => {
-    fetchUsersAndUpdateData(page, limit)
-  }, [page,limit]);
+    fetchUsersAndUpdateData(page, limit,usertype)
+  }, [page,limit,usertype]);
 
-  console.log(users);
+  // console.log(users);
   const handleClick = (usertype) => {
     setPage(0);
     setUsertype(usertype);
   };
-
+  const navigateCities = () => {
+    // 👇️ navigate to /
+    navigate('/cities');
+  };
   return (
     <div className="App">
       <Stack direction="column" spacing={4} align="center">
@@ -97,13 +99,16 @@ function App() {
           email does not include any digit.
         </Button>
         <Button
-          onClick={() => handleClick("topCities")}
+          onClick={() => navigateCities()}
           colorScheme="teal"
           variant="outline"
         >
           Show the data of top 10 cities which have the highest number of users
           and their average income.{" "}
         </Button>
+        <Routes>
+          <Route path="/cities" element={<CitiesTable />} />
+        </Routes>
       </Stack>
       <UserTable users={users} />
       <Flex justifyContent="space-between" m={4} alignItems="center">
