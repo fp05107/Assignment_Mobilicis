@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Table,
   Thead,
@@ -7,16 +7,19 @@ import {
   Th,
   Td,
   TableCaption,
-  chakra,
-  useBreakpointValue
-} from '@chakra-ui/react';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+} from "@chakra-ui/react";
 
-const UserTable = ({ users,handleEdit, handleDelete }) => {
-  const tableSize = useBreakpointValue({ base: 'sm', md: 'md', lg: 'lg' });
 
+const UserTable = ({ users }) => {
+// console.log(users);
   return (
-    <Table variant="striped" colorScheme="teal" borderWidth="1px" borderRadius="md">
+    <>
+    <Table
+      variant="striped"
+      colorScheme="red"
+      borderWidth="1px"
+      borderRadius="md"
+    >
       <TableCaption>Users Data</TableCaption>
       <Thead>
         <Tr>
@@ -27,10 +30,11 @@ const UserTable = ({ users,handleEdit, handleDelete }) => {
           <Th>Income</Th>
           <Th>City</Th>
           <Th>Car</Th>
-          <Th>Actions</Th>
+          <Th>Phone_Price</Th>
         </Tr>
       </Thead>
       <Tbody>
+        
         {users.map((user) => (
           <Tr key={user.id}>
             <Td>{user.id}</Td>
@@ -42,7 +46,24 @@ const UserTable = ({ users,handleEdit, handleDelete }) => {
             <Td>${user.income.toFixed(2)}</Td>
             <Td>{user.city}</Td>
             <Td>{user.car}</Td>
-            <Td>
+            <Td>{user.phone_price}</Td>
+           
+          </Tr>
+        ))}
+      </Tbody>
+    </Table>
+   
+    </>
+  );
+};
+
+export default UserTable;
+
+
+
+
+
+ {/* <Td>
               <chakra.button
                 variant="ghost"
                 colorScheme="teal"
@@ -60,12 +81,4 @@ const UserTable = ({ users,handleEdit, handleDelete }) => {
               >
                 <FaTrash />
               </chakra.button>
-            </Td>
-          </Tr>
-        ))}
-      </Tbody>
-    </Table>
-  );
-};
-
-export default UserTable;
+            </Td> */}
