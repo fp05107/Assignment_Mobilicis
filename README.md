@@ -1,13 +1,17 @@
 <h1>User Management System</h1>
 <h3>Description</h3>
 This Is a Simple User Management System Where Admin can check Users Data and modify it accordingly.
+<br/>
+<br/>
+<h4>This Picture Shows The Users Data</h4>
 <img src="./FrontEnd/Images/Mobilicis_ReadmePic_1.png"/>
+<br/>
+<h4>This Picture Shows The Cities Data</h4>
+<br/>
+<img src="./FrontEnd/Images/Mobilicis_ReadmePic_2.png"/>
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title>User Management API</title>
-</head>
 
 <body>
     <h1>User Management API</h1>
